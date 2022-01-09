@@ -1,0 +1,45 @@
+\input{USTAWIENIA}
+
+% marginesy
+\usepackage{anysize}
+\usepackage{subfig}
+\usepackage{multirow}
+\usepackage{diagbox}
+\usepackage{pdfpages}
+\marginsize{3cm}{2.5cm}{2.5cm}{2.5cm}%LPGD
+%\setlength{\textheight}{24cm}
+% za spraw¹ thesis
+%\textwidth 150mm
+%\textheight 225mm
+
+\begin{document}
+%
+\bibliographystyle{acm}
+%
+\includepdf[pages={1}]{stronatytulowa.pdf}
+%
+%\stronatytulowa
+\titlepage
+\cleardoublepage % jeœli dwustronnie, to druga strona powinna byæ pusta
+\frontmatter 
+%\maketitle
+
+%\tocbibname
+
+\tableofcontents %\listoffigures \listoftables
+%\listofacros
+%\input{abbrev_body}
+%\newpage
+%\input{spis_oznaczen}
+
+\mainmatter % <--- to + frontmatter powy¿ej odpowiada za fakt, ¿e numerowanie jest od 1!
+\input{Rozdzialy}
+
+%\appendix  % <--- zaczynaj¹ siê dodatki; jak nazywa siê rozdzia³ -> szukaæ appendixname powy¿ej
+%\input{Dodatek_A}
+
+\clearpage \addcontentsline{toc}{chapter}{\bibname}
+%\bibliography{Praca}
+
+
+\end{document}
