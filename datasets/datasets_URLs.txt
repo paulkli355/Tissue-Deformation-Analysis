@@ -1,0 +1,6 @@
+URL to google drive with usg images datasets:
+-	breast images dataset
+	https://drive.google.com/drive/folders/13BEV-vJSBQrTTInjO7zNEqPsmPgIDdD2?usp=sharing
+
+-	captured USG images
+	https://drive.google.com/drive/folders/1566PHewKenoMp8fgnXvJoSLuMPYMR0aZ?usp=sharing
