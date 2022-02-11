@@ -2,6 +2,9 @@
 ## Tissue deformation analysis in ultrasound images
 author: Paulina Klimanek
 
+## Project goal
+The subject of the project is the development and implementation of a methodology for mapping deformation changes in soft tissues in ultrasound examinations (strain elastography). It is assumed that the developed method will use the tracking of image features in the sequence of ultrasound images during tissue compression.
+
 This repository contains files connected with developing master's thesis project. 
 
 ### Current status
