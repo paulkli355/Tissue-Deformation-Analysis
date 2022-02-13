@@ -1,55 +1,99 @@
 \chapter{Wstêp}
 %\emph{Automatyczna analiza obrazów (AAO)\footnote{Tak wprowadzamy skróty.} jest niezwykle istotn¹ i szybko rozwijaj¹c¹ siê dziedzin¹ nauki. Bez narzêdzi (\ang{tools}) AAO trudno dziœ sobie wyobraziæ ksi¹¿ki o~przetwarzaniu obrazów \cite{Gonzalez} i~inne. Jednym z~popularniejszych narzêdzi analizy s¹ no¿yczki.}
 
-Obrazowanie ultrasonograficzne jest jednym najbardziej dostêpnych oraz nieinwazyjnych badañ obrazowych. Klasyczna ultrasonografia 2D nie pozwala jednak na okreœlenie w³asnoœci elastycznych obrazowanych tkanek. Nie jest to mo¿liwe zarówno w~sposób bezpoœredni polegaj¹cy na okreœleniu modu³u Younga tkanek, ani poœredni, wyznaczaj¹c odkszta³cenia wystêpuj¹ce w strukturach cia³a \cite{7}. 
+Obrazowanie ultrasonograficzne jest jednym z najbardziej dostêpnych oraz nieinwazyjnych badañ obrazowych. Klasyczna ultrasonografia 2D nie pozwala jednak na okreœlenie w³asnoœci elastycznych obrazowanych tkanek. Nie jest to mo¿liwe zarówno w~sposób bezpoœredni polegaj¹cy na okreœleniu modu³u Younga tkanek, ani poœredni, wyznaczaj¹c odkszta³cenia wystêpuj¹ce w strukturach cia³a \cite{Cygan}. 
 
-Rozwi¹zaniem jest badanie elastografii ultrasonograficznej, które za pomoc¹ ultradŸwiêków pozwala na wykrywanie zmian sztywnoœci w obrêbie tkanek miêkkich. Elastografia jest szeroko stosowana w wykrywaniu i klasyfikacji guzów piersi oraz prostaty, zmian w obszarze w¹troby, monitorowaniu ablacji termicznej, charakterystyce p³ytek wewn¹trznaczyniowych, badaniu w³aœciwoœci naczyñ wieñcowych czy te¿ w diagnostyce guzów tarczycy \cite{6,7,8,9}. 
-
-\section{Rozwi¹zania alternatywne}
-TO DO
-\section{Cel pracy}
-Celem pracy jest opracowanie oraz implementacja metodologii mapowania zmian odkszta³ceñ w tkankach miêkkich w badaniach ultrasonograficznych. Zak³ada siê, ¿e opracowana metoda bêdzie wykorzystywa³a œledzenie cech obrazu w sekwencji obrazów USG podczas ucisku tkanki. Przyk³adem badania, z jakim bêdzie mo¿na porównaæ wyniki otrzymane przez stworzony algorytm jest elastografia typu Strain.
+Rozwi¹zaniem jest badanie elastografii ultrasonograficznej, które za pomoc¹ ultradŸwiêków pozwala na wykrywanie zmian sztywnoœci w obrêbie tkanek miêkkich. Elastografia jest szeroko stosowana w wykrywaniu i klasyfikacji guzów piersi oraz prostaty, zmian w obszarze w¹troby, monitorowaniu ablacji termicznej, charakterystyce p³ytek wewn¹trznaczyniowych, badaniu w³aœciwoœci naczyñ wieñcowych czy te¿ w diagnostyce guzów tarczycy \cite{Onur,Cygan,Thitaikumar,Grajo}. 
 
 \section{Wprowadzenie teoretyczne}
+W ramach wprowadzenia, poni¿ej zostan¹ przybli¿one pojêcia zwi¹zane z ultrasonografi¹ oraz badaniem elastografii. Dokonana zostanie równie¿ analiza opisanych w~literaturze alternatywnych rozwi¹zañ problemu odkszta³cenia tkanek miêkkich w~wyniku wykonywanych badañ USG b¹dŸ chirurgii ma³oinwazyjnej (np. obrazów z kamery endoskopowej).
 
-Elastografia jest technik¹ pozwalaj¹c¹ zobrazowaæ w³aœciwoœci elastyczne tkanek miêkkich poprzez szacowanie modu³ów odkszta³ceñ w czasie dzia³ania cyklu kompresji i dekompresji (relaksacji) \cite{6}. Impedancjê akustyczn¹ (znan¹ z klasycznej ultrasonografii) jest w tym przypadku opisuje modu³ Younga \cite{10}. Obrazy powsta³e wskutek badania to elastogramy, przyk³adowy zosta³ zaprezentowany na Rysunku \ref{obrazyWE}. W praktyce bowiem otrzymuje siê mapy odkszta³ceñ w badanym oœrodku, a nie obrazy w³aœciwoœci mechanicznych tkanki \cite{7}.
+\subsection{Podstawy ultrasonografii}
 
-Badanie to jest wspó³czesnym odpowiednikiem palpacyjnej metody badania zmian sztywnoœci tkanek. Przezwyciê¿a ono ograniczenia starej metody, która ogranicza³a badanie do elementów znajduj¹cych siê blisko powierzchni skóry \cite{10}. 
+Podstaw¹ dzia³ania ultrasonografii s¹ ultradŸwiêki -- fale mechaniczne o czêstotliwoœci powy¿ej 20 tysiêcy Hz, które znajduj¹ siê poza zasiêgiem ludzkiego s³uchu. W~przypadku diagnostycznego badania ultrasonografii, fale te zazwyczaj znajduj¹ siê w~zakresie od 1 do 30 MHz, w tym:
+\begin{itemize}
+	\item 3-5 MHz dla obszaru jamy brzusznej,
+	\item 5-10 MHz dla ma³ych i powierzchniowych czêœci cia³a,
+	\item 10-30 MHz w przypadku badañ skóry lub oczu \cite{WHO}. 
+\end{itemize}
 
-Fizyczn¹ podstawê badania elastografii ultrasonograficznej stanowi zasada mówi¹ca o si³ach rozprê¿aj¹cych oraz œciskaj¹cych, a tak¿e œcinaj¹cych, powoduj¹cych œciskanie i rozprê¿anie poszczególnych oœrodków. Wp³yw wymienionych si³ wi¹¿e siê z odkszta³ceniem tkanek oraz powstaniem fali mechanicznej \cite{10}. Falê pod³u¿n¹ wywo³uje nacisk sondy, fale ultradŸwiêkowe emitowane przez sondê b¹dŸ dodatkowa sonda, s³u¿¹ca do wytworzenia oddzielnej wi¹zki ultradŸwiêkowej \cite{10}.
+\subsubsection{Efekt piezoelektryczny}
+Kluczowym zjawiskiem dla opisywanego tematu jest efekt piezoelektryczny, polegaj¹cy na zdolnoœci materia³u (kryszta³u piezoelektrycznego) do przekszta³cenia ciœnienia mechanicznego na napiêcie elektryczne na ich powierzchni. Efekt ten jest wiêc mo¿liwy do zaobserwowania podczas œciskania i rozci¹gania piezoelektryka, co skutkuje powstaniem zmian w jego gruboœci (Rys. \ref{piezoX}, \ref{piezoY}) \cite{WHO}. 
+Ultrasonografia wykorzystuje zjawisko piezoelektryczne odwrotne. Po przy³o¿eniu napiêcia, kryszta³ piezoelektryczny zmienia swoje wymiary geometryczne. Przyk³adaj¹c wiêc zmienne napiêcie o okreœlonej czêstotliwoœci, wzbudzone zostaj¹ drgania (fale mechaniczne wewn¹trz oœrodka) o tej samej czêstotliwoœci. Kryszta³ piezoelektryczny pe³ni rolê przetwornika, zmieniaj¹cego energiê elektryczn¹ na mechaniczn¹ oraz odwrotnie. 
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{rysunki/piezoX}
+	\caption{Efekt piezoelektryczny wystêpuj¹cy podczas œciskania i rozci¹gania p³ytki wzd³u¿ osi X}
+	\label{piezoX}
+\end{figure}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.5755\textwidth]{rysunki/piezoY}
+	\caption{Efekt piezoelektryczny wystêpuj¹cy podczas œciskania i rozci¹gania p³ytki wzd³u¿ osi Y}
+	\label{piezoY}
+\end{figure}
+
+\subsubsection{Typy g³owic}
+TO DO
+
+\subsubsection{Prezentacja typu B}
+TO DO
+
+\subsection{Elastografia}
+
+Elastografia jest technik¹ pozwalaj¹c¹ zobrazowaæ w³aœciwoœci elastyczne tkanek miêkkich poprzez szacowanie modu³ów odkszta³ceñ w czasie dzia³ania cyklu kompresji i dekompresji (relaksacji) \cite{Onur}. Impedancjê akustyczn¹ (znan¹ z klasycznej ultrasonografii) jest w tym przypadku opisuje modu³ Younga \cite{Fedak}. Obrazy powsta³e wskutek badania to elastogramy, przyk³adowy zosta³ zaprezentowany na Rysunku \ref{obrazyWE}. W praktyce bowiem otrzymuje siê mapy odkszta³ceñ w badanym oœrodku, a nie obrazy w³aœciwoœci mechanicznych tkanki \cite{Cygan}.
+
+Badanie to jest wspó³czesnym odpowiednikiem palpacyjnej metody badania zmian sztywnoœci tkanek. Przezwyciê¿a ono ograniczenia starej metody, która ogranicza³a badanie do elementów znajduj¹cych siê blisko powierzchni skóry \cite{Fedak}. 
+
+Fizyczn¹ podstawê badania elastografii ultrasonograficznej stanowi zasada mówi¹ca o si³ach rozprê¿aj¹cych oraz œciskaj¹cych, a tak¿e œcinaj¹cych, powoduj¹cych œciskanie i rozprê¿anie poszczególnych oœrodków. Wp³yw wymienionych si³ wi¹¿e siê z odkszta³ceniem tkanek oraz powstaniem fali mechanicznej \cite{Fedak}. Falê pod³u¿n¹ wywo³uje nacisk sondy, fale ultradŸwiêkowe emitowane przez sondê b¹dŸ dodatkowa sonda, s³u¿¹ca do wytworzenia oddzielnej wi¹zki ultradŸwiêkowej \cite{Fedak}.
 
 Badania wyró¿niaj¹ dwa typy obrazowania metod¹ elastografii: 
 \begin{itemize}
-	\item obrazowanie typu Strain (ang. \textit{Strain Imaging}) -- zak³ada, ¿e Ÿród³em fali pod³u¿nej jest ucisk sondy lub ultradŸwiêki z niej wychodz¹ce. Pomiaru elastycznoœci tkanek dokonuje siê oceniaj¹c odkszta³cenia powsta³e w danej tkance \cite{10}.
-	\item obrazowanie typu SWE (ang. \textit{Shear Wave Elastography}) -- wykonywany jest pomiar prêdkoœci rozchodzenia siê fali poprzecznej uzyskanej wskutek emitowanych przez sondê ultradŸwiêków. Metoda wykonuje pomiar na podstawie powsta³ej mapy odkszta³ceñ oœrodka \cite{10}.
+	\item obrazowanie typu Strain (ang. \textit{Strain Imaging}) -- zak³ada, ¿e Ÿród³em fali pod³u¿nej jest ucisk sondy lub ultradŸwiêki z niej wychodz¹ce. Pomiaru elastycznoœci tkanek dokonuje siê oceniaj¹c odkszta³cenia powsta³e w danej tkance \cite{Fedak}.
+	\item obrazowanie typu SWE (ang. \textit{Shear Wave Elastography}) -- wykonywany jest pomiar prêdkoœci rozchodzenia siê fali poprzecznej uzyskanej wskutek emitowanych przez sondê ultradŸwiêków. Metoda wykonuje pomiar na podstawie powsta³ej mapy odkszta³ceñ oœrodka \cite{Fedak}.
 \end{itemize}  
 
-Podstawowym parametrem, z jakimi wi¹¿e siê elastografia jest przede wszystkim Modu³ Younga, który mo¿na zdefiniowaæ za pomoc¹ nastêpuj¹cej zale¿noœci \cite{7}:
+Podstawowym parametrem, z jakimi wi¹¿e siê elastografia jest przede wszystkim Modu³ Younga, który mo¿na zdefiniowaæ za pomoc¹ nastêpuj¹cej zale¿noœci \cite{Cygan}:
 
 \begin{equation}
 E = \dfrac{\sigma}{\epsilon},
 \end{equation} 
 
-gdzie $\epsilon$ oznacza odkszta³cenie liniowe, oraz naprê¿enia $\sigma$ z nim zwi¹zane. Elastycznoœæ jest wiêc stosunkiem naprê¿enia koniecznego do powstania zmiany d³ugoœci tkanki -- odkszta³cenia. Wartoœæ tego parametru mo¿e siê ró¿niæ w~zale¿noœci od wyst¹pienia stanu patologicznego, stanów zapalnych, starzenia siê b¹dŸ wystêpowania nowotworu tkanki \cite{6}. W³aœciwoœci jakimi cechuj¹ siê tkanki patologiczne (w tym nowotworowe) ró¿ni¹ siê znacz¹co od zdrowych -- zazwyczaj ich elastycznoœæ jest mniejsza \cite{7}.
+gdzie $\epsilon$ oznacza odkszta³cenie liniowe, oraz naprê¿enia $\sigma$ z nim zwi¹zane. Elastycznoœæ jest wiêc stosunkiem naprê¿enia koniecznego do powstania zmiany d³ugoœci tkanki -- odkszta³cenia. Wartoœæ tego parametru mo¿e siê ró¿niæ w~zale¿noœci od wyst¹pienia stanu patologicznego, stanów zapalnych, starzenia siê b¹dŸ wystêpowania nowotworu tkanki \cite{Onur}. W³aœciwoœci jakimi cechuj¹ siê tkanki patologiczne (w tym nowotworowe) ró¿ni¹ siê znacz¹co od zdrowych -- zazwyczaj ich elastycznoœæ jest mniejsza \cite{Cygan}.
+
+%\begin{figure} [H]
+%	\centering
+%	\includegraphics[width=1\textwidth]{rysunki/obrazyWE}
+%	\caption{Obraz ultrasonograficzny (po lewej) oraz odpowiadaj¹cy mu obraz elastografii typu strain~\cite{Onur}}
+%	\label{obrazyWE}
+%\end{figure}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=1\textwidth]{rysunki/obrazyWE}
-	\caption{Obraz ultrasonograficzny (po lewej) oraz odpowiadaj¹cy mu obraz elastografii typu strain~\cite{6}}
+	\includegraphics[width=0.7\textwidth]{rysunki/elasto}
+	\caption{Obraz ultrasonograficzny (po lewej) oraz odpowiadaj¹cy mu obraz elastografii}
 	\label{obrazyWE}
 \end{figure}
 
-Odkszta³ceniem liniowym $\epsilon$ nazywa siê stosunek zmiany d³ugoœci tkanki podczas deformacji, w odniesieniu do d³ugoœci pierwotnej. Zale¿noœæ t¹ opisuje wzór \cite{7}:
+Odkszta³ceniem liniowym $\epsilon$ nazywa siê stosunek zmiany d³ugoœci tkanki podczas deformacji, w odniesieniu do d³ugoœci pierwotnej. Zale¿noœæ t¹ opisuje wzór \cite{Cygan}:
 
 \begin{equation}
 \epsilon = \dfrac{L-{L}_0}{{L}_0}.
 \end{equation}
 
-Natomiast naprê¿enie jest stosunkiem si³y do pola przekroju badanej tkanki (obiektu) i opisuje j¹ zale¿noœæ \cite{7}:
+Natomiast naprê¿enie jest stosunkiem si³y do pola przekroju badanej tkanki (obiektu) i opisuje j¹ zale¿noœæ \cite{Cygan}:
 
 \begin{equation}
 \sigma = \dfrac{F}{S}
 \end{equation}
+
+\section{Rozwi¹zania alternatywne}
+TO DO
+
+\section{Cel pracy}
+Celem pracy jest opracowanie oraz implementacja metodologii mapowania zmian odkszta³ceñ w tkankach miêkkich w badaniach ultrasonograficznych. Zak³ada siê, ¿e opracowana metoda bêdzie wykorzystywa³a œledzenie cech obrazu w sekwencji obrazów USG podczas ucisku tkanki. Przyk³adem badania, z jakim bêdzie mo¿na porównaæ wyniki otrzymane przez stworzony algorytm jest elastografia typu Strain.
 %\section{Uk³ad pracy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Metodologia}\label{Chapter_Metodologia}
@@ -62,7 +106,10 @@ Stanowisko mia³o na celu umo¿liwienie rejestracji obrazów ultrasonograficznych, 
 \end{itemize}
 
 \section{Akwizycja danych}
-Rejestracja danych zosta³a przeprowadzona na przedstawionym w sekcji \ref{stanowisko} stanowisku badawczym. Do akwizycji obrazów wykorzystano urz¹dzenie ... wraz z g³owic¹ typu ... oraz program ... . Oprogramowanie to umo¿liwia ... . Zarejestrowane obrazy USG maj¹ rozmiar ... i~obejmuj¹ ... . Serie obrazowe zosta³y zapisane w postaci ... oraz zarchiwizowane. 
+Rejestracja danych zosta³a przeprowadzona na przedstawionym w sekcji \ref{stanowisko} stanowisku badawczym. Do akwizycji obrazów wykorzystano urz¹dzenie Mindray UMT-500Plus wraz z g³owicami: liniow¹ L13-3s oraz konweksow¹ C5-1s. Serie obrazowe zosta³y zapisane z wykorzystaniem standardu DICOM. 
+
+\subsubsection{Przyk³adowe obrazy}
+TO DO
 
 %\begin{figure}[H]
 % \subfloat[Podpis 1\label{f1:c1}]{\includegraphics[width=0.45\textwidth]{logoPS}} \; % <--- to daje odstêp w poziomie; \\ daje now¹ linijkê
@@ -109,37 +156,50 @@ Rejestracja danych zosta³a przeprowadzona na przedstawionym w sekcji \ref{stanow
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\chapter{Podsumowanie}
 
+
+
+
+
+
+
+
+
+
+
+
 \begin{thebibliography}{0.9}
-\bibitem{1} Richard G. Barr, Zheng Zhang, Shear-wave elastography of the breast: value of a quality measure and comparison with strain elastography, Radiology, Tom 275, Numer 1, 2015, s. 45-53.
+\bibitem{Barr} Richard G. Barr, Zheng Zhang, \textit{Shear-wave elastography of the breast: value of a quality measure and comparison with strain elastography}, Radiology, Tom 275, Numer 1, 2015, s. 45-53.
 
-\bibitem{2}	Jonathan F. Carlsen, Caroline Ewertsen, Lars Lönn, Michael B. Nielsen, Strain elastography ultrasound: an overview with emphasis on breast cancer diagnosis, Diagnostics, Tom 3, 2013, s. 117-125.
+\bibitem{Carlsen} Jonathan F. Carlsen, Caroline Ewertsen, Lars Lönn, Michael B. Nielsen, \textit{Strain elastography ultrasound: an overview with emphasis on breast cancer diagnosis, Diagnostics}, Tom 3, 2013, s. 117-125.
 
-\bibitem{3}	Jung Min Chang, Jae-Kyung Won, Kyoung-Bun Lee, In Ae Park, Ann Yi, Woo Kyung Moon, Comparison of Shear-wave and strain ultrasound elastography in the differentiation of begin and malignant breast lesions, American Roentgen Ray Society, Tom 201, 2013, s. 347-356.
+\bibitem{Chang}	Jung Min Chang, Jae-Kyung Won, Kyoung-Bun Lee, In Ae Park, Ann Yi, Woo Kyung Moon, \textit{Comparison of Shear-wave and strain ultrasound elastography in the differentiation of begin and malignant breast lesions}, American Roentgen Ray Society, Tom 201, 2013, s. 347-356.
 
-\bibitem{4}	Giovanna Ferraioli, Carmine Tinelli, Antonello Malfitano, Barbara Dal Bello, Gaetano Filice, Carlo Filice, Performance of real-time strain elastography, transient elastography, and aspartate-to-platelet ratio index in the assessment of fibrosis in chronic hepatitis C, American Roentgen Ray Society, Tom 199, 2012, s. 19-25.
+\bibitem{Ferraioli}	Giovanna Ferraioli, Carmine Tinelli, Antonello Malfitano, Barbara Dal Bello, Gaetano Filice, Carlo Filice, \textit{Performance of real-time strain elastography, transient elastography, and aspartate-to-platelet ratio index in the assessment of fibrosis in chronic hepatitis C}, American Roentgen Ray Society, Tom 199, 2012, s. 19-25.
 
-\bibitem{5}	Christoph F. Dietrich, Richard G. Barr, André Farrokh, Manjiri Dighe, Michael Hocke, Christian Jenssen, Yi Dong, Adrian Saftoiu, Roald Flesland Havre, Strain elastography – how to do it?, Ultrasound int Open, Tom 3, 2017, s. 137-149. 
+\bibitem{Dietrich} Christoph F. Dietrich, Richard G. Barr, André Farrokh, Manjiri Dighe, Michael Hocke, Christian Jenssen, Yi Dong, Adrian Saftoiu, Roald Flesland Havre, \textit{Strain elastography – how to do it?}, Ultrasound int Open, Tom 3, 2017, s. 137-149. 
 
-\bibitem{6}	Mehmet Ruhi Onur, Ahmet Kursad Poyraz, Esra Ercin Ucak, Zulkif Bozgeyik, Ibrahim Hanifi Özercan, Erkin Ogur, Semiquntitative strain elastography of liver masses, American Institute of Ultrasound in Medicine | J Ultrasound Med, Tom 31, 2012, s. 1061-1067.
+\bibitem{Onur}	Mehmet Ruhi Onur, Ahmet Kursad Poyraz, Esra Ercin Ucak, Zulkif Bozgeyik, Ibrahim Hanifi Özercan, Erkin Ogur, \textit{Semiquntitative strain elastography of liver masses}, American Institute of Ultrasound in Medicine | J Ultrasound Med, Tom 31, 2012, s. 1061-1067.
 
-\bibitem{7}	Szymon Cygan, Metoda wyznaczania przemieszczeñ i odkszta³ceñ dla potrzeb elastografii w warunkach znacznych odkszta³ceñ tkanek Rozprawa doktorska, Politechnika Warszawska, Wydzia³ Mechatroniki, 2011.
+\bibitem{Cygan}	Szymon Cygan, \textit{Metoda wyznaczania przemieszczeñ i odkszta³ceñ dla potrzeb elastografii w warunkach znacznych odkszta³ceñ tkanek}, Rozprawa doktorska, Politechnika Warszawska, Wydzia³ Mechatroniki, 2011.
 
-\bibitem{8}	Arun Thitaikumar, Louise M Mobbs, Christina M Kraemer-Chant, Brian S Garra, Jonathan Ophir, Breast tumor classification using axial shear strain elastography: a feasibility study, Physics in Medicine and Biology, Tom 53, 2008, s. 4809-4823.
+\bibitem{Thitaikumar} Arun Thitaikumar, Louise M Mobbs, Christina M Kraemer-Chant, Brian S Garra, Jonathan Ophir, \textit{Breast tumor classification using axial shear strain elastography: a feasibility study}, Physics in Medicine and Biology, Tom 53, 2008, s. 4809-4823.
 
-\bibitem{9}	Joseph R. Grajo, Richard G. Barr, Strain elastography for prediction of breast cancer tumor grades, American Institute of Ultrasound in Medicine | J Ultrasound Med, Tom 33, 2014, s. 278-297.
+\bibitem{Grajo}	Joseph R. Grajo, Richard G. Barr, \textit{Strain elastography for prediction of breast cancer tumor grades}, American Institute of Ultrasound in Medicine | J Ultrasound Med, Tom 33, 2014, s. 278-297.
 
-\bibitem{10} Andrzej Fedak, Badania ultrasonograficzne: elastografia ultrasonograficzna, In¿ynier i Fizyk Medyczny, Tom 8, 2019, s. 167-170.
+\bibitem{Fedak} Andrzej Fedak, \textit{Badania ultrasonograficzne: elastografia ultrasonograficzna}, In¿ynier i Fizyk Medyczny, Tom 8, 2019, s. 167-170.
 
-\bibitem{11} Elena Drakonaki, Elastografia w obrazowaniu œciêgien i miêœni, Journal of Ultrasonography, Tom 12, 2012, s. 214-225.
+\bibitem{Drakonaki} Elena Drakonaki, \textit{Elastografia w obrazowaniu œciêgien i miêœni}, Journal of Ultrasonography, Tom 12, 2012, s. 214-225.
 
-\bibitem{12} Tomasz Batko, Ocena przydatnoœci ,,jakoœciowej elastografii ultrasonograficznej czasu rzeczywistego" w ró¿nicowaniu pomiêdzy prawid³owymi i patologicznymi wêz³ami ch³onnymi szyjnymi u dzieci i m³odzie¿y, Rozprawa doktorska, Gdañski Uniwersytet Medyczny, 2014.
+\bibitem{Batko} Tomasz Batko, \textit{Ocena przydatnoœci ,,jakoœciowej elastografii ultrasonograficznej czasu rzeczywistego" w ró¿nicowaniu pomiêdzy prawid³owymi i patologicznymi wêz³ami ch³onnymi szyjnymi u dzieci i m³odzie¿y}, Rozprawa doktorska, Gdañski Uniwersytet Medyczny, 2014.
 
-\bibitem{13} Maurice, R. L., Ohayon, J., Fretigny, Y., Bertrand, M., Soulez, G., Cloutier, G., Noninvasive Vascular Elastography: Theoretical Framework, IEEE Transactions on Medical Imaging, Tom 23, Numer 2, 2004, s. 164–180.
+\bibitem{Maurice} Maurice, R. L., Ohayon, J., Fretigny, Y., Bertrand, M., Soulez, G., Cloutier, G., Noninvasive \textit{Vascular Elastography: Theoretical Framework}, IEEE Transactions on Medical Imaging, Tom 23, Numer 2, 2004, s. 164–180.
 
-\bibitem{14} Korukonda, S., Doyley, M., Visualizing the radial and circumferential strain distribution within vessel phantoms using synthetic-aperture ultrasound elastography. IEEE Transactions on Ultrasonics, Ferroelectrics and Frequency Control, Tom 59, Numer 8, 2012, s. 1639–1653.
+\bibitem{Korukonda} Korukonda, S., Doyley, M., \textit{Visualizing the radial and circumferential strain distribution within vessel phantoms using synthetic-aperture ultrasound elastography}, IEEE Transactions on Ultrasonics, Ferroelectrics and Frequency Control, Tom 59, Numer 8, 2012, s. 1639–1653.
 
-\bibitem{15} Nayak, R., Huntzicker, S., Ohayon, J., Carson, N., Dogra, V., Schifitto, G., Doyley, M. M., Principal Strain Vascular Elastography: Simulation and Preliminary Clinical Evaluation. Ultrasound in Medicine \& Biology, Tom 43, Numer 3, 2017, s. 682–699.
+\bibitem{Nayak} Nayak, R., Huntzicker, S., Ohayon, J., Carson, N., Dogra, V., Schifitto, G., Doyley, M. M., \textit{Principal Strain Vascular Elastography: Simulation and Preliminary Clinical Evaluation}, Ultrasound in Medicine \& Biology, Tom 43, Numer 3, 2017, s. 682–699.
 
-\bibitem{16} Maurice, R. L., Daronat, M., Ohayon, J., Stoyanova, É., Foster, F. S., Cloutier, G., Non-invasive high-frequency vascular ultrasound elastography. Physics in Medicine and Biology, Tom 50, Numer 7, 2005, s. 1611–1628.
+\bibitem{Maurice2} Maurice, R. L., Daronat, M., Ohayon, J., Stoyanova, É., Foster, F. S., Cloutier, G., \textit{Non-invasive high-frequency vascular ultrasound elastography}, Physics in Medicine and Biology, Tom 50, Numer 7, 2005, s. 1611–1628.
+
+\bibitem{WHO} \textit{Manual of diagnostic ultrasound. Vol. 1. -- 2nd ed}, red. Harald Lutz, Elisabetta Buscarini, World Health Organization, 2011.
 
 \end{thebibliography}

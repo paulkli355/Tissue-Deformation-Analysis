@@ -1,29 +1,20 @@
 \begin{thebibliography}{1}
 
-\bibitem{Chwalowski}
-{\sc Chwa³owski, R.}
-\newblock {\em {Typografia typowej ksi¹¿ki}}.
-\newblock Helion, 2001.
+\bibitem{Cygan}
+{\sc Cygan, S.}
+\newblock {\em Metoda wyznaczania przemieszczeÅ„ i odksztaÅ‚ceÅ„ dla potrzeb
+  elastografii w warunkach znacznych odksztaÅ‚ceÅ„ tkanki}.
+\newblock PhD thesis, 2011.
 
-\bibitem{Gonzalez}
-{\sc Gonzalez, R.~C., and Woods, R.~E.}
-\newblock {\em {Digital image Processing}}.
-\newblock Prentice Hall, 2002.
+\bibitem{Grajo}
+{\sc Grajo, J.~R., and Barr, R.~G.}
+\newblock Strain elastography for prediction of breast cancer tumor grades.
+\newblock {\em Journal of Ultrasound in Medicine 33}, 1 (2014), 129â€“134.
 
-\bibitem{Malina}
-{\sc Malina, W., Ablameyko, S., and Pawlak, W.}
-\newblock {\em {Podstawy cyfrowego przetwarzania obrazów}}.
-\newblock Akademicka Oficyna Wydawnicza EXIT, Warszawa, 2002.
-
-\bibitem{Nieniewski_Morfologia}
-{\sc Nieniewski, M.}
-\newblock {\em {Morfologia matematyczna w przetwarzaniu obrazów}}.
-\newblock Problemy wspó³czesnej nauki. Teoria i zastosowania. Informatyka.
-  Akademicka Oficyna Wydawnicza PLJ, Warszawa, 1998.
-
-\bibitem{Tadeusiewicz}
-{\sc Tadeusiewicz, R.}
-\newblock {\em {Komputerowa analiza i przetwarzanie obrazów}}.
-\newblock Wydawnictwo Fundacji i Postêpu Telekomunikacji, Kraków, 1997.
+\bibitem{Onur}
+{\sc Onur, M.~R., Poyraz, A.~K., Ucak, E.~E., Bozgeyik, Z., Ã–zercan, I.~H.,
+  and Ogur, E.}
+\newblock Semiquantitative strain elastography of liver masses.
+\newblock {\em Journal of Ultrasound in Medicine 31}, 7 (2012), 1061â€“1067.
 
 \end{thebibliography}
